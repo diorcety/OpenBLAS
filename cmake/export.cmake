@@ -2,7 +2,7 @@
 #Only generate .def for dll on MSVC
 if(MSVC)
 
-set_source_files_properties(${OpenBLAS_DEF_FILE} PROPERTIES GENERATED 1)
+find_package(Perl REQUIRED)
 
 if (NOT DEFINED ARCH)
   set(ARCH_IN "x86_64")
@@ -53,7 +53,7 @@ endif()
 add_custom_command(
   OUTPUT ${PROJECT_BINARY_DIR}/openblas.def
   #TARGET ${OpenBLAS_LIBNAME} PRE_LINK
-  COMMAND perl 
+  COMMAND ${PERL_EXECUTABLE}
   ARGS "${PROJECT_SOURCE_DIR}/exports/gensymbol" "win2k" "${ARCH_IN}" "dummy" "${EXPRECISION_IN}" "${NO_CBLAS_IN}" "${NO_LAPACK_IN}" "${NO_LAPACKE_IN}" "${NEED2UNDERSCORES_IN}" "${ONLY_CBLAS_IN}" "${SYMBOLPREFIX}" "${SYMBOLSUFFIX}" > "${PROJECT_BINARY_DIR}/openblas.def"
   COMMENT "Create openblas.def file"
   VERBATIM)
