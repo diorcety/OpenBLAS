@@ -188,6 +188,12 @@ target_include_directories(${OpenBLAS_LIBNAME} INTERFACE $<INSTALL_INTERFACE:inc
 if(ANDROID)
   target_link_libraries(${OpenBLAS_LIBNAME} m)
 endif()
+if(OpenMP_C_FOUND)
+  target_link_libraries(${OpenBLAS_LIBNAME} ${OpenMP_C_LIBRARIES})
+endif()
+if(OpenMP_Fortran_FOUND)
+  target_link_libraries(${OpenBLAS_LIBNAME} ${OpenMP_Fortran_LIBRARIES})
+endif()
 
 # Handle MSVC exports
 if(MSVC AND BUILD_SHARED_LIBS)
