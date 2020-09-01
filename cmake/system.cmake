@@ -148,6 +148,7 @@ endif ()
 
 if (USE_THREAD)
   message(STATUS "Multi-threading enabled with ${NUM_THREADS} threads.")
+  find_package(Threads)
 else()
   if (${USE_LOCKING})
     set(CCOMMON_OPT "${CCOMMON_OPT} -DUSE_LOCKING")
