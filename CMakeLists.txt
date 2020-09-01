@@ -14,6 +14,8 @@ set(OpenBLAS_VERSION "${OpenBLAS_MAJOR_VERSION}.${OpenBLAS_MINOR_VERSION}.${Open
 include(GNUInstallDirs)
 
 include(CMakePackageConfigHelpers)
+include(CheckLibraryExists)
+CHECK_LIBRARY_EXISTS(m sqrt "" HAVE_LIB_M)
 
 
 #######
@@ -184,10 +186,10 @@ endif ()
 add_library(${OpenBLAS_LIBNAME} ${LA_SOURCES} ${LAPACKE_SOURCES} ${RELA_SOURCES} ${TARGET_OBJS} ${OpenBLAS_DEF_FILE})
 target_include_directories(${OpenBLAS_LIBNAME} INTERFACE $<INSTALL_INTERFACE:include/openblas${SUFFIX64}>)
 
-# Android needs to explicitly link against libm
-if(ANDROID)
+# add library dependencies
+if (HAVE_LIB_M)
   target_link_libraries(${OpenBLAS_LIBNAME} m)
-endif()
+endif (HAVE_LIB_M)
 if(OpenMP_C_FOUND)
   target_link_libraries(${OpenBLAS_LIBNAME} ${OpenMP_C_LIBRARIES})
 endif()
