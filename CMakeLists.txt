@@ -213,7 +213,6 @@ enable_testing()
 
 if (USE_THREAD)
   # Add threading library to linker
-  find_package(Threads)
   if (THREADS_HAVE_PTHREAD_ARG)
     set_property(TARGET ${OpenBLAS_LIBNAME} PROPERTY COMPILE_OPTIONS "-pthread")
     set_property(TARGET ${OpenBLAS_LIBNAME} PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")

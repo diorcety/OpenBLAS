@@ -136,6 +136,7 @@ endif ()
 
 if (USE_THREAD)
   message(STATUS "Multi-threading enabled with ${NUM_THREADS} threads.")
+  find_package(Threads)
 endif ()
 
 include("${PROJECT_SOURCE_DIR}/cmake/prebuild.cmake")
