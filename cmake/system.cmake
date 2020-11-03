@@ -65,11 +65,6 @@ if (DEFINED TARGET)
   set(GETARCH_FLAGS "-DFORCE_${TARGET}")
 endif ()
 
-# On x86_64 build getarch with march=native. This is required to detect AVX512 support in getarch.
-if (X86_64 AND NOT ${CMAKE_C_COMPILER_ID} STREQUAL "PGI")
-  set(GETARCH_FLAGS "${GETARCH_FLAGS} -march=native")
-endif ()
-
 # On x86 no AVX support is available
 if (X86 OR X86_64)
 if ((DEFINED BINARY AND BINARY EQUAL 32) OR ("$CMAKE_SIZEOF_VOID_P}" EQUAL "4"))
